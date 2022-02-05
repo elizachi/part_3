@@ -41,6 +41,7 @@ fun read(catId: String) {
     } else {
         System.err.print("Read: not found.\n")
     }
+
 }
 fun update(catInfo: String) {
     // проверка данных на корректность

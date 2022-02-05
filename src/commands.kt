@@ -21,7 +21,7 @@ fun create(catInfo: String) {
         // пара <id> <data class>
         val newCat = Pair(catId, catDataClass)
         // если не нашлось такого же ключа
-        if (search(bucketIndex, catId) == -1) {
+        if (keySearch(bucketIndex, catId) == -1) {
             CatHashTable[bucketIndex].add(newCat)
             print("$catId successfully added.\n")
         } else {
@@ -34,7 +34,7 @@ fun create(catInfo: String) {
 fun read(catId: String) {
     // для одного и того же id индекст будет одним и тем же
     val bucketIndex = getBucketIndex(catId)
-    val pairIndex = search(bucketIndex, catId)
+    val pairIndex = keySearch(bucketIndex, catId)
     if(pairIndex != -1) {
         print("${CatHashTable[bucketIndex][pairIndex].first} --> ${CatHashTable[bucketIndex][pairIndex].second.colour}" +
                 " ${CatHashTable[bucketIndex][pairIndex].second.age} ${CatHashTable[bucketIndex][pairIndex].second.weight}\n")
@@ -56,7 +56,7 @@ fun update(catInfo: String) {
         // пара <id> <data class>
         val newCat = Pair(catId, catDataClass)
         // индекс пары с catId
-        val pairIndex = search(bucketIndex, catId)
+        val pairIndex = keySearch(bucketIndex, catId)
         // если такой элемент есть
         if (pairIndex != -1) {
             CatHashTable[bucketIndex][pairIndex] = newCat
@@ -72,13 +72,24 @@ fun delete(catId: String) {
     // для одного и того же id индекст будет одним и тем же
     val bucketIndex = getBucketIndex(catId)
     // индекст пары с catId
-    val pairIndex = search(bucketIndex, catId)
+    val pairIndex = keySearch(bucketIndex, catId)
     // если такой элемент есть
     if(pairIndex != -1) {
         CatHashTable[bucketIndex].remove(CatHashTable[bucketIndex][pairIndex])
         print("$catId removed successfully.\n")
     } else {
         System.err.print("Delete: not found.\n")
+    }
+}
+fun where_weight(weight: String) {
+    val weight = getArguments(weight).toFloat()
+    for(arrayElement in CatHashTable) {
+        for(linkedListElement in arrayElement) {
+            if(linkedListElement.second.weight == weight) {
+                print("${linkedListElement.first} --> ${linkedListElement.second.colour}" +
+                        " ${linkedListElement.second.age} ${linkedListElement.second.weight}\n")
+            }
+        }
     }
 }
 fun readall() {

@@ -22,6 +22,8 @@ fun main() {
                 delete(arguments)
             } else if(command == "update"){
                 update(arguments)
+            } else if(command == "where"){
+                where_weight(arguments)
             } else {
                 print("Команда введена направильно.")
             }

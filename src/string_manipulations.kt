@@ -48,7 +48,7 @@ fun isFloat(pieceOfCat: String): Boolean {
 fun getBucketIndex(key: String): Int {
     return kotlin.math.abs(key.hashCode() % numOfBuckets)
 }// поиск пары по первому элементу
-fun search(index: Int, key: String): Int {
+fun keySearch(index: Int, key: String): Int {
     for(element in CatHashTable[index]) {
         if(element.first == key) {
             return CatHashTable[index].indexOf(element) // есть такой элемент, ретурн его индекс

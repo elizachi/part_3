@@ -1,3 +1,4 @@
+import java.lang.Math.abs
 import java.util.*
 // дата класс для составления пар
 data class Cat(val colour: String, val age: Int, val weight: Float)
@@ -32,7 +33,7 @@ fun create(catInfo: String) {
     }
 }
 fun read(catId: String) {
-    // для одного и того же id индекст будет одним и тем же
+    // для одного и того же id индекс будет одним и тем же
     val bucketIndex = getBucketIndex(catId)
     val pairIndex = keySearch(bucketIndex, catId)
     if(pairIndex != -1) {
@@ -41,7 +42,6 @@ fun read(catId: String) {
     } else {
         System.err.print("Read: not found.\n")
     }
-
 }
 fun update(catInfo: String) {
     // проверка данных на корректность
@@ -82,11 +82,11 @@ fun delete(catId: String) {
         System.err.print("Delete: not found.\n")
     }
 }
-fun where_weight(weight: String) {
+fun where(weight: String) {
     val weight = getArguments(weight).toFloat()
     for(arrayElement in CatHashTable) {
         for(linkedListElement in arrayElement) {
-            if(linkedListElement.second.weight == weight) {
+            if(kotlin.math.abs(linkedListElement.second.weight - weight) <= 0.001) {
                 print("${linkedListElement.first} --> ${linkedListElement.second.colour}" +
                         " ${linkedListElement.second.age} ${linkedListElement.second.weight}\n")
             }

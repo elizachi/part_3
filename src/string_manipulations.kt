@@ -32,7 +32,6 @@ fun isInt(pieceOfCat: String): Boolean {
     if(filterPiece == pieceOfCat) return true
     return false
 } // доп. функция для проверки типа данных
-// TODO оптимизировать
 fun isFloat(pieceOfCat: String): Boolean {
     val nums = pieceOfCat.split('.')
     if(nums.size <= 2) {
